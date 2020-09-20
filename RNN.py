@@ -52,8 +52,8 @@ class model(torch.nn.Module):
         self.RNN = torch.nn.RNN(input_size=self.input_size, hidden_size=self.hidden_size, num_layers=self.num_layer)
 
     def forward(self, input):
-        hidden = torch.zeros(self.num_layer, self.num_layer, self.hidden_size)
-        out, hn = self.RNN(inputs, hidden)  # 返回h1--hn和单独的一个hn
+        hidden = torch.zeros(self.num_layer, self.batch_size, self.hidden_size)
+        out, hn = self.RNN(input, hidden)  # 返回h1--hn和单独的一个hn
         return out.view(-1, self.hidden_size)  # (seq_len x batch_size,1)
 
 
